@@ -1,0 +1,16 @@
+set sw=4
+set ts=8
+set et
+set smarttab
+set ai
+set wildmenu
+set wildignore+=CVS,*.swp
+set nobackup
+set noswapfile
+
+" Hide toolbar & menu
+set guioptions-=m
+set guioptions-=T
+
+highlight Pmenu ctermfg=0 ctermbg=3
+highlight PmenuSel ctermfg=0 ctermbg=7
