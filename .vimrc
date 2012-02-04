@@ -1,1 +1,0 @@
-/home/torh/.vimrc
