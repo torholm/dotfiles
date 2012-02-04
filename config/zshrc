@@ -1,0 +1,45 @@
+# Prompt settings
+fg_darkgray=$'%{\e[0;30m%}'
+fg_lightgray=$'%{\e[1;30m%}'
+fg_normalize=$'%{\e[0m%}'
+PROMPT="${fg_lightgray}%T  ${fg_normalize}%n${fg_lightgray}@${fg_normalize}%m:${fg_darkgray}[${fg_normalize}%B%~%b${fg_darkgray}]${fg_normalize}%# "
+RPROMPT=""
+
+# Aliases
+alias ls='ls --color=auto'
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+alias ..="cd .."
+
+# History opts
+HISTFILE=~/.zhistory
+HISTSIZE=SAVEHIST=10000
+setopt incappendhistory 
+setopt sharehistory
+setopt extendedhistory
+
+# vim vim vim
+alias v="vim"
+alias gv="gvim"
+export EDITOR=vim
+
+# Bind ctrl+left/+right to prev/next word
+bindkey '^[[1;5C' emacs-forward-word
+bindkey '^[[1;5D' emacs-backward-word
+bindkey "^[Od" emacs-backward-word  
+bindkey "^[Oc" emacs-forward-word   
+bindkey -e
+
+# Break words on "/"
+WORDCHARS="*?_-.[]~=&;!#$%^(){}<>"
+
+# Autocompletion
+zstyle ':completion:*' menu select=0
+setopt +o menucomplete
+
+# services
+source ~/.zshrc-private
