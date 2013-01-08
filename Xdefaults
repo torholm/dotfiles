@@ -1,0 +1,5 @@
+URxvt*foreground: White
+URxvt*background: Black
+URxvt.perl-ext-common:  default,matcher
+URxvt.url-launcher:      /usr/bin/google-chrome
+URxvt.matcher.button:   1

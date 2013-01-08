@@ -13,7 +13,7 @@ require("debian.menu")
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, and wallpapers
-beautiful.init("/home/torh/.config/awesome/currenttheme.lua")
+beautiful.init("/home/tor/.config/awesome/defaulttheme.lua")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "urxvt"
