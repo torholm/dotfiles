@@ -11,6 +11,9 @@ require("naughty")
 -- Load Debian menu entries
 require("debian.menu")
 
+-- Vicious
+vicious = require("vicious")
+
 -- {{{ Variable definitions
 -- Themes define colours, icons, and wallpapers
 beautiful.init("/home/tor/.config/awesome/defaulttheme.lua")
@@ -50,7 +53,7 @@ layouts =
 tags = {}
 for s = 1, screen.count() do
     -- Each screen has its own tag table.
-    tags[s] = awful.tag({ 1, 2, 3, 4, 5, 6, 7, 8, 9 }, s, layouts[1])
+    tags[s] = awful.tag({ "  irc", "  web", "  3", "  4", "  5", "  6", "  7", "  8", "  9" }, s, layouts[1])
 end
 -- }}}
 
@@ -73,7 +76,54 @@ mylauncher = awful.widget.launcher({ image = image(beautiful.awesome_icon),
                                      menu = mymainmenu })
 -- }}}
 
+separator = widget({ type = "textbox" })
+separator.text  = "  <span color=\"#666666\">|</span>  "
+
 -- {{{ Wibox
+batteryWidget = widget({ type = "textbox" })
+batteryWidget.width = 90
+vicious.register(batteryWidget, vicious.widgets.bat, "battery: <span color=\"#ffffff\">$1</span> <span color=\"#00ff00\">$2%</span>", 5, "BAT")
+
+thermalWidget = widget({ type = "textbox" })
+thermalWidget.width = 100
+vicious.register(thermalWidget, vicious.widgets.thermal, "cpu temp: <span color=\"#00ff00\">$1°C</span>", 2, { "coretemp.0", "core" })
+
+cpuwidgetGraph = awful.widget.graph()
+cpuwidgetGraph:set_width(50)
+cpuwidgetGraph:set_background_color("#111111")
+cpuwidgetGraph:set_color("#FFFFFF")
+cpuwidgetGraph:set_gradient_colors({ "#FF0000", "#00FF00" })
+cpuwidgetGraph:set_gradient_angle(0)
+vicious.register(cpuwidgetGraph, vicious.widgets.cpu, "$1", 5)
+
+cpuwidget = widget({ type = "textbox" })
+cpuwidget.width = 75
+vicious.register(cpuwidget, vicious.widgets.cpu, "cores: <span color=\"#eee\">$1%</span>", 2)
+
+wifiWidget = widget({ type = "textbox" })
+wifiWidget.width = 75
+vicious.register(wifiWidget, vicious.widgets.wifi, "wifi: <span color=\"#eee\">${ssid}</span>", 10, "wlan0")
+
+weatherWidget = widget({ type = "textbox" })
+weatherWidget.width = 200
+vicious.register(weatherWidget, vicious.widgets.weather, "weather: <span color=\"#eee\">${tempc}°C (${sky})</span>", 120, "ESSB")
+
+memwidget = awful.widget.progressbar()
+-- Progressbar properties
+memwidget:set_width(25)
+-- memwidget:set_height(10)
+memwidget:set_vertical(false)
+memwidget:set_background_color("#494B4F")
+memwidget:set_border_color(nil)
+memwidget:set_color("#AECF96")
+memwidget:set_gradient_colors({ "#AECF96", "#88A175", "#FF5656" })
+-- Register widget
+vicious.register(memwidget, vicious.widgets.mem, "$1", 13)
+
+memtextwidget = widget({ type = "textbox" })
+memtextwidget.width = 180
+vicious.register(memtextwidget, vicious.widgets.mem, " mem: <span color=\"#eee\">$1% ($2M/$3M)</span>", 13)
+
 -- Create a textclock widget
 mytextclock = awful.widget.textclock({ align = "right" }, "%b %d, %T", 1)
 
@@ -82,6 +132,7 @@ mysystray = widget({ type = "systray" })
 
 -- Create a wibox for each screen and add it
 mywibox = {}
+mywibox2 = {}
 mypromptbox = {}
 mylayoutbox = {}
 mytaglist = {}
@@ -156,9 +207,28 @@ for s = 1, screen.count() do
         },
         mylayoutbox[s],
         mytextclock,
-        s == 1 and mysystray or nil,
         mytasklist[s],
         layout = awful.widget.layout.horizontal.rightleft
+    }
+
+    mywibox2[s] = awful.wibox({ position = "bottom", screen = s })
+    mywibox2[s].widgets = {
+        weatherWidget,
+        separator,
+        batteryWidget,
+        separator,
+        thermalWidget,
+        separator,
+        cpuwidget,
+        cpuwidgetGraph,
+        separator,
+        wifiWidget,
+        separator,
+        memwidget,
+        memtextwidget,
+        separator,
+        s == 1 and mysystray or nil,
+        layout = awful.widget.layout.horizontal.leftright
     }
 end
 -- }}}

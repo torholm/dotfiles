@@ -1,0 +1,3 @@
+[submodule "config/awesome/eminent"]
+	path = config/awesome/eminent
+	url = git://git.glacicle.org/awesome/eminent.git

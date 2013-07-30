@@ -1,5 +1,8 @@
 URxvt*foreground: White
-URxvt*background: Black
+URxvt.depth: 32
+URxvt.background: [80]#000000
+urxvt*shading:    20
+urxvt*transparent:true
 URxvt.perl-ext-common:  default,matcher
-URxvt.url-launcher:      /usr/bin/google-chrome
+URxvt.url-launcher:      /usr/bin/firefox
 URxvt.matcher.button:   1
