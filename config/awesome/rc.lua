@@ -125,7 +125,7 @@ memtextwidget.width = 180
 vicious.register(memtextwidget, vicious.widgets.mem, " mem: <span color=\"#eee\">$1% ($2M/$3M)</span>", 13)
 
 -- Create a textclock widget
-mytextclock = awful.widget.textclock({ align = "right" }, "%b %d, %T", 1)
+mytextclock = awful.widget.textclock({ align = "right" }, " %a %b %d, %T ", 1)
 
 -- Create a systray
 mysystray = widget({ type = "systray" })
@@ -434,7 +434,4 @@ run_once("nm-applet")
 run_once("ssh-agent")
 run_once("gnome-settings-daemon")
 
-awful.util.spawn_with_shell("synclient VertTwoFingerScroll=1")
-awful.util.spawn_with_shell("synclient HorizTwoFingerScroll=1")
-awful.util.spawn_with_shell("synclient EmulateTwoFingerMinW=5")
-awful.util.spawn_with_shell("synclient EmulateTwoFingerMinZ=48")
+awful.util.spawn_with_shell("/home/tor/.2f-scroll")

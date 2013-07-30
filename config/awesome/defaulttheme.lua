@@ -75,7 +75,7 @@ theme.titlebar_maximized_button_focus_active  = "/usr/share/awesome/themes/defau
 
 -- You can use your own command to set your wallpaper
 -- theme.wallpaper_cmd = { "/home/tor/update_bg" }
-theme.wallpaper_cmd = { "feh --bg-scale /home/tor/.config/awesome/wallpaper2.jpg" }
+theme.wallpaper_cmd = { "feh --bg-center /home/tor/.config/awesome/wallpaper3.jpg" }
 
 -- You can use your own layout icons like this:
 theme.layout_fairh = "/usr/share/awesome/themes/default/layouts/fairhw.png"
